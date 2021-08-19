@@ -14,6 +14,14 @@ class Product {
     imgURL = _imgURL;
   }
 
+  Product.inicializar() {
+    id = "";
+    name = "";
+    category = "";
+    price = 0;
+    imgURL = "";
+  }
+
   static Product fromJson(Map<String, dynamic> json) {
     print(json);
     return Product(json['_id'], json['name'], json['category'],

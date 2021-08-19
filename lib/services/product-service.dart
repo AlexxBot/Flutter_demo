@@ -12,16 +12,14 @@ class ProductService {
   //ProductService()
   //Promise<CPersona>
   //Task<CPersona>
-  Future<List<Product>> listarProducts() async {
+
+  Future<List<Product>> listProducts() async {
     try {
       var url = Uri.parse(urlProduct);
       final response = await http.get(url);
       if (response.statusCode == 200) {
         hayError = false;
-        //mapear los datos a json
-        //retornar
         final lista = jsonDecode(response.body);
-
         final List<Product> productList = lista.map<Product>((productJson) {
           return Product.fromJson(productJson);
         }).toList();
@@ -35,6 +33,23 @@ class ProductService {
       hayError = true;
       return [];
     }
-    //return Future.value([]);
+  }
+
+  Future<Product> getProduct(String id) async {
+    try {
+      var url = Uri.parse('$urlProduct/$id');
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final respuesta = jsonDecode(response.body);
+        final Product product = Product.fromJson(respuesta);
+        return product;
+      } else {
+        return Product.inicializar();
+      }
+    } catch (e) {
+      print(e);
+      hayError = true;
+      return Product.inicializar();
+    }
   }
 }

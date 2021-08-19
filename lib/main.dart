@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/pages/products/product-list-page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_demo/bloc/auth/auth_bloc.dart';
+import 'package:flutter_demo/pages/login/login-page.dart';
+import 'package:flutter_demo/pages/product/product-list-page.dart';
 import './pages/list-page.dart';
+import 'app.dart';
+import 'services/auth-service.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,20 +15,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Demo BS',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Colors.blueAccent
-            //primarySwatch: Colors.blue,
-            ),
-        home: ProductListPage(
-          titulo: "Lista de Productos",
-        )
-        /* ListPage(titulo: 'lista de Prodcutos',) */ /* MyWidget(
-          titulo: 'BS DEMO',
-          contador: 20,
-        ) */
-        );
+    return BlocProvider<AuthBloc>(
+        create: (context) => AuthBloc(AuthService()), child: App());
   }
 }
 
