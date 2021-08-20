@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_demo/bloc/product/product_bloc.dart';
 import 'package:flutter_demo/models/product.dart';
+import 'package:flutter_demo/pages/menu-page.dart';
 import 'package:flutter_demo/pages/product/product-form-page.dart';
 import 'package:flutter_demo/services/product-service.dart';
 
@@ -20,7 +21,7 @@ class _ProductListPageState extends State<ProductListPage> {
 
   //List<Product> productList = [];
 
-  late final ProductBloc productBloc;
+  late ProductBloc productBloc;
 
   @override
   void initState() {
@@ -52,6 +53,7 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MenuPage(),
       appBar: AppBar(title: Text(widget.titulo)),
       body: RefreshIndicator(
         onRefresh: _handleRefresh,

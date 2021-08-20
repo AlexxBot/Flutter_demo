@@ -12,3 +12,9 @@ class LoggedInState extends AuthState {}
 class LoggetOutState extends AuthState {}
 
 class ProcesandoState extends AuthState {}
+
+class ErrorState extends AuthState {
+  final String mensaje;
+
+  ErrorState({this.mensaje = ''});
+}

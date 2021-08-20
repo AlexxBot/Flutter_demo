@@ -10,9 +10,11 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthService authService;
+
   AuthBloc(this.authService) : super(AuthInitial());
 
-  late String token;
+  String token = "";
+  String userName = "";
 
   @override
   Stream<AuthState> mapEventToState(
@@ -21,8 +23,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event is LoginEvent) {
       yield ProcesandoState();
       final token = await authService.login(event.userName, event.password);
-      this.token = token;
-      yield LoggedInState();
+      if (token != "") {
+        this.userName = event.userName;
+        this.token = token;
+        yield LoggedInState();
+      } else {
+        yield ErrorState(mensaje: "error el iniciar session");
+      }
     }
   }
 }
