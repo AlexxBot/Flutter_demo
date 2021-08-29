@@ -8,6 +8,8 @@ import 'package:flutter_demo/pages/menu-page.dart';
 import 'package:flutter_demo/pages/product/product-form-page.dart';
 import 'package:flutter_demo/services/product-service.dart';
 
+import 'busqueda-widget.dart';
+
 class ProductListPage extends StatefulWidget {
   final String titulo;
   const ProductListPage({Key? key, this.titulo = 'Items'}) : super(key: key);
@@ -54,7 +56,10 @@ class _ProductListPageState extends State<ProductListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MenuPage(),
-      appBar: AppBar(title: Text(widget.titulo)),
+      appBar: AppBar(
+        title: Text(widget.titulo),
+        actions: [BusquedaWidget()],
+      ),
       body: RefreshIndicator(
         onRefresh: _handleRefresh,
         child: BlocBuilder<ProductBloc, ProductState>(

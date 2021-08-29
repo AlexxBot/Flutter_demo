@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_demo/bloc/auth/auth_bloc.dart';
 import 'package:flutter_demo/pages/login/login-page.dart';
 import 'package:flutter_demo/pages/product/product-list-page.dart';
+import 'package:flutter_demo/services/product-service.dart';
 import './pages/list-page.dart';
 import 'app.dart';
+import 'bloc/product/product_bloc.dart';
 import 'services/auth-service.dart';
 
 void main() {
@@ -15,8 +17,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthBloc>(
-        create: (context) => AuthBloc(AuthService()), child: App());
+    return MultiBlocProvider(providers: [
+      BlocProvider<AuthBloc>(create: (context) => AuthBloc(AuthService())),
+      /* BlocProvider<ProductBloc>(
+          create: (context) => ProductBloc(ProductService())) */
+    ], child: App());
+    /* return BlocProvider<AuthBloc>(
+        create: (context) => AuthBloc(AuthService()), child: App()); */
   }
 }
 

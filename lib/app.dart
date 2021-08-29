@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_demo/pages/chat/chat_page.dart';
 import 'package:flutter_demo/pages/login/login-page.dart';
 import 'package:flutter_demo/pages/product/product-list-page.dart';
 import 'package:flutter_demo/services/product-service.dart';
@@ -14,12 +15,13 @@ class App extends StatelessWidget {
         title: 'Demo App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.blueAccent),
-        initialRoute: "/",
+        initialRoute: "/chat",
         routes: {
           "/": (context) => LoginPage(),
           "/product": (context) => BlocProvider<ProductBloc>(
               create: (context) => ProductBloc(ProductService()),
               child: ProductListPage()),
+          "/chat": (context) => ChatPage()
         });
   }
 }

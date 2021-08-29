@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_demo/bloc/auth/auth_bloc.dart';
+import 'package:flutter_demo/bloc/product/product_bloc.dart' as productBloc;
+import 'package:flutter_demo/pages/product/product-list-page.dart';
+import 'package:flutter_demo/services/product-service.dart';
 import 'package:flutter_demo/widgets/button-widget.dart';
 import 'package:flutter_demo/widgets/loading-widget.dart';
 
@@ -65,7 +68,17 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       if (state is LoggedInState) {
                         LoadingWidget.hide(context);
-                        Navigator.pushNamed(context, '/product');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BlocProvider<productBloc.ProductBloc>(
+                                        create: (context) =>
+                                            productBloc.ProductBloc(
+                                                ProductService()),
+                                        child: ProductListPage())));
+
+                        //Navigator.pushNamed(context, '/product');
                       }
                     },
                     child: Column(

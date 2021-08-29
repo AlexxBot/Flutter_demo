@@ -24,10 +24,10 @@ class _ProductFormPageState extends State<ProductFormPage> {
   @override
   void initState() {
     super.initState();
-    productBloc = BlocProvider.of<ProductBloc>(context, listen: true);
-    //productBloc.add(RecuperarEvent(widget.id));
-
     authBloc = BlocProvider.of<AuthBloc>(context);
+    productBloc = BlocProvider.of<ProductBloc>(context);
+
+    productBloc.add(RecuperarEvent(widget.id));
   }
 
   @override
@@ -36,19 +36,18 @@ class _ProductFormPageState extends State<ProductFormPage> {
         appBar: AppBar(
           title: Text("Formulario"),
         ),
-        body:
-            /* SafeArea(
-          child: BlocListener<ProductBloc, ProductState>(
-        bloc: productBloc,
-        listener: (context, state) {
-          if (state is RecuperadoState) {
-            print("se recupero el product");
-          }
-        },
-      )), */
-            Container(
+        body: SafeArea(
+            child: BlocListener<ProductBloc, ProductState>(
+          bloc: productBloc,
+          listener: (context, state) {
+            if (state is RecuperadoState) {
+              print("se recupero el product");
+            }
+          },
+        )));
+    /* Container(
           height: MediaQuery.of(context).size.height,
           color: Colors.red,
-        ));
+        )); */
   }
 }

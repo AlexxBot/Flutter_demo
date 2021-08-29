@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_demo/bloc/auth/auth_bloc.dart';
+import 'package:flutter_demo/bloc/product/product_bloc.dart';
 import 'package:flutter_demo/models/product.dart';
+import 'package:flutter_demo/pages/product/product-list-page.dart';
+import 'package:flutter_demo/services/product-service.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
@@ -45,6 +48,10 @@ class _MenuPageState extends State<MenuPage> {
                 ListTile(
                   title: Text("Products"),
                   onTap: () => Navigator.of(context).pushNamed('/product'),
+                ),
+                ListTile(
+                  title: Text("Chat"),
+                  onTap: () => Navigator.of(context).pushNamed('/chat'),
                 )
               ],
             )
